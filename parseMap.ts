@@ -1,5 +1,5 @@
 import { mainnet } from './map'
-import { DISTRICT_ID, NORTH, SOUTH, EAST, WEST, NS, EW, NE, SW, SE, ROAD, DEAD_END, CORNER, OPEN_CORNER, OPEN_ROAD, FORK, OPEN_FORK, CROSS_ROADS } from './const'
+import { DISTRICT_ID, NORTH, SOUTH, EAST, WEST, NS, EW, NE, SW, SE, ROAD, DEAD_END, CORNER, OPEN_CORNER, OPEN_ROAD, FORK, CROSS_ROADS } from './const'
 import { Map, Parcel, Road, Roadmap, CoordinateMap } from './types'
 
 const filterRoads = (x: Parcel[]) => x.filter(x => x.district_id == DISTRICT_ID)
@@ -32,10 +32,10 @@ export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
         ) {
             return {
                 roadType: DEAD_END,
-                orientation: !get(x,y+1) ? NORTH
-                    : !get(x,y-1) ? SOUTH
-                    : !get(x+1,y) ? EAST
-                    : !get(x-1,y) ? WEST
+                orientation: get(x,y-1) ? NORTH
+                    : get(x,y+1) ? SOUTH
+                    : get(x-1,y) ? EAST
+                    : get(x+1,y) ? WEST
                     : null
             }
         }
@@ -44,47 +44,38 @@ export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
             orientation: emptySides ? NS : EW
         }
     }
-    if ((emptyOneSide && fullVertical) ||
-        (emptyOneVertical && fullSides)
-    ) {
-        return {
-            roadType: OPEN_ROAD,
-            orientation: !get(x+1,y) ? NORTH
-                : !get(x-1,y) ? SOUTH
-                : !get(x,y+1) ? EAST
-                : !get(x,y-1) ? WEST
-                : null
+    if (emptyOneSide || emptyOneVertical) {
+        const countEmpty = (+!get(x+1,y)) + (+!get(x-1,y)) + (+!get(x,y+1)) + (+!get(x,y-1))
+
+        if (countEmpty === 1) {
+            const orientation =
+                    !get(x+1,y) ? NORTH
+                  : !get(x-1,y) ? SOUTH
+                  : !get(x,y-1) ? EAST
+                  : !get(x,y+1) ? WEST
+                  : null
+            const roadType =
+              (orientation == NORTH || orientation == EAST && get(x-1,y+1)) ? OPEN_ROAD 
+            : (orientation == SOUTH || orientation == WEST && get(x+1,y-1)) ? OPEN_ROAD : FORK
+            return { orientation, roadType }
+        } else if (countEmpty === 2) {
+            const orientation =
+                    (get(x-1,y) && get(x,y-1)) ? NORTH
+                  : (get(x+1,y) && get(x,y+1)) ? SOUTH
+                  : (get(x-1,y) && get(x,y+1)) ? EAST
+                  : (get(x+1,y) && get(x,y-1)) ? WEST
+                  : null
+            if (orientation == null) throw new Error('impossible to detect')
+            const roadType =
+                (orientation == NORTH && !get(x-1,y-1)) ? CORNER
+              : (orientation == SOUTH && !get(x+1,y+1)) ? CORNER
+              : (orientation == EAST && !get(x-1,y+1)) ? CORNER
+              : (orientation == WEST && !get(x+1,y-1)) ? CORNER
+              : OPEN_CORNER
+            return {
+                roadType, orientation
+            }
         }
-    }
-    if (emptyOneVertical && emptyOneSide) {
-        const orientation =
-                (get(x-1,y) && get(x,y-1)) ? NORTH
-              : (get(x+1,y) && get(x,y+1)) ? SOUTH
-              : (get(x-1,y) && get(x,y+1)) ? EAST
-              : (get(x+1,y) && get(x,y-1)) ? WEST
-              : null
-        if (orientation == null) throw new Error('impossible to detect')
-        const roadType =
-            (orientation == NORTH && !get(x-1,y-1)) ? CORNER
-          : (orientation == SOUTH && !get(x+1,y+1)) ? CORNER
-          : (orientation == EAST && !get(x-1,y+1)) ? CORNER
-          : (orientation == WEST && !get(x+1,y-1)) ? CORNER
-          : OPEN_CORNER
-        return {
-            roadType, orientation
-        }
-    }
-    if (emptyOneSide) {
-        const orientation =
-                !get(x+1,y) ? NORTH
-              : !get(x-1,y) ? SOUTH
-              : !get(x,y-1) ? EAST
-              : !get(x,y+1) ? WEST
-              : null
-        const roadType =
-          (orientation == NORTH || orientation == EAST && !get(x-1,y+1)) ? OPEN_FORK 
-        : (orientation == SOUTH || orientation == WEST && !get(x+1,y-1)) ? OPEN_FORK : FORK
-        return { orientation, roadType }
     }
     throw new Error('Invalid formation of tiles')
 }

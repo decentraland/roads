@@ -15,7 +15,7 @@ export const TYPE_INDEX = [
     OPEN_ROAD, // DOne
     OPEN_CORNER, // Done
     CROSS_ROADS, // DONE
-    OPEN_FORK, // DONE
+    EMPTY, // DONE
     CORNER,  // DONE
     DEAD_END, // DONE
     FORK // DONE
