@@ -27,7 +27,7 @@ export const TYPE_INDEX = [
 ]
 export const TYPE_MAP = {}
 TYPE_INDEX.forEach(
-    (item, index) => TYPE_MAP[item] = index
+    (item, index) => TYPE_MAP[item] = index + 1
 )
 export const MODEL_FILENAME = {
     [ROAD]: 'Road',
