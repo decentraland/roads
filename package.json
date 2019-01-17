@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx ts-node test/parseMap.spec.ts"
+    "test": "npx ts-node test/parseMap.spec.ts",
+    "run": "npx ts-node src/main.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18"
   }
 }

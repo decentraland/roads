@@ -1,6 +1,12 @@
-import { Map } from '../types'
-import { CORNER, ROAD, OPEN_ROAD, CROSS_ROADS, OPEN_CORNER, OPEN_FORK, FORK, DEAD_END, DISTRICT_ID, NORTH, SOUTH, EAST, WEST, NS, EW } from '../const'
-import { processMap } from '../parseMap'
+import { Map } from '../src/types'
+import {
+    CORNER, ROAD, OPEN_ROAD, CROSS_ROADS, OPEN_CORNER, OPEN_FORK, FORK, DEAD_END,
+    EMPTY_FORK,
+    DISTRICT_ID,
+    NORTH, SOUTH, EAST, WEST,
+    NS, EW
+} from '../src/const'
+import { processMap } from '../src/parseMap'
 
 try {
 
@@ -18,7 +24,7 @@ if (result1[1][0].roadType !== DEAD_END) console.log('Missed dead end')
 if (result1[1][2].orientation !== NORTH) console.log('Missed dead end, north')
 if (result1[1][0].orientation !== SOUTH) console.log('Missed dead end, south')
 if (result1[1][1].roadType !== ROAD) console.log('Missed north-south')
-if (result1[1][1].orientation !== NS) console.log('Missed north-south orientation')
+if (result1[1][1].orientation !== NORTH) console.log('Missed north-south orientation')
 
 const case2: Map = {
     parcels: [
@@ -57,6 +63,55 @@ if (result3[2][1].orientation !== EAST) console.log('Missed middle end orientati
 if (result3[2][2].roadType !== DEAD_END) console.log('Missed middle dead end')
 if (result3[2][2].orientation !== NORTH) console.log('Missed middle dead end orientation')
 
+const case4: Map = {
+    parcels: [
+        { x: 0, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 4, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 0, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 1, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 4, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 3, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 0, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 0, id: 'a', district_id: DISTRICT_ID },
+    ]
+}
+
+const result4 = processMap(case4)
+if (result4[2][2].roadType !== EMPTY_FORK) console.log('Missed empty fork')
+if (result4[2][2].orientation !== SOUTH) console.log('Missed empty fork orientation')
+if (result4[2][1].roadType !== OPEN_FORK) console.log('Missed open fork')
+if (result4[2][1].orientation !== NORTH) console.log('Missed open fork orientation')
+
+const case5: Map = {
+    parcels: [
+        { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 3, id: 'a', district_id: DISTRICT_ID },
+    ]
+}
+
+const result5 = processMap(case5)
+if (result5[3][1].roadType !== CORNER) console.log('Missed closed corner')
+
+const case6: Map = {
+    parcels: [
+        { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 1, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 2, id: 'a', district_id: DISTRICT_ID },
+        { x: 3, y: 3, id: 'a', district_id: DISTRICT_ID },
+    ]
+}
+
+const result6 = processMap(case6)
+if (result6[3][1].roadType !== CORNER) console.log('Missed closed corner')
 
 } catch (e) {
     console.log(e.stack)

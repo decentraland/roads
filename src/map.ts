@@ -1,5 +1,4 @@
-import fs from 'fs'
+import fs = require('fs')
+import { DclMap } from './types'
 
-import Map from './types'
-
-export const mainnet: Map = JSON.parse(fs.readFileSync('./genesis.json').toString())['data']['assets']
+export const mainnet: DclMap = JSON.parse(fs.readFileSync('./data/mainnet.json').toString())['data']

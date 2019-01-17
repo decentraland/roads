@@ -2,10 +2,11 @@ export interface Parcel {
     id: string
     x: number
     y: number
+    owner?: string
     district_id: string
 }
 
-export interface Map {
+export interface DclMap {
     parcels: Parcel[]
 }
 
