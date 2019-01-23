@@ -5,7 +5,7 @@
             "componentType" : 5121,
             "count" : 72,
             "max" : [
-                43
+                39
             ],
             "min" : [
                 0
@@ -15,23 +15,23 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 44,
+            "count" : 40,
             "max" : [
-                1.0,
-                1.0,
-                14.756670951843262
+                4.897626876831055,
+                0.9375011920928955,
+                4.9285712242126465
             ],
             "min" : [
-                -1.1661715507507324,
-                -1.0,
-                -1.0
+                -4.710780620574951,
+                0.0040665664710104465,
+                -4.733185768127441
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 44,
+            "count" : 40,
             "max" : [
                 1.0,
                 1.0,
@@ -39,7 +39,7 @@
             ],
             "min" : [
                 -1.0,
-                -0.9999999403953552,
+                -1.0,
                 -1.0
             ],
             "type" : "VEC3"
@@ -61,14 +61,14 @@
             "componentType" : 5126,
             "count" : 3632,
             "max" : [
-                9.999998092651367,
-                0.0,
-                0.007964134216308594
+                4.999998092651367,
+                5.0,
+                0.007963319309055805
             ],
             "min" : [
-                -6.033806130290031e-07,
-                -9.999998092651367,
-                -0.935923159122467
+                -5.000000476837158,
+                -4.999998092651367,
+                -0.9359239935874939
             ],
             "type" : "VEC3"
         },
@@ -116,44 +116,44 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 528,
+            "byteLength" : 480,
             "byteOffset" : 72,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 528,
-            "byteOffset" : 600,
+            "byteLength" : 480,
+            "byteOffset" : 552,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 15924,
-            "byteOffset" : 1128,
+            "byteOffset" : 1032,
             "target" : 34963
         },
         {
             "buffer" : 0,
             "byteLength" : 43584,
-            "byteOffset" : 17052,
+            "byteOffset" : 16956,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 43584,
-            "byteOffset" : 60636,
+            "byteOffset" : 60540,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 29056,
-            "byteOffset" : 104220,
+            "byteOffset" : 104124,
             "target" : 34962
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 133276,
+            "byteLength" : 133180,
             "uri" : "OpenCorner_A.bin"
         }
     ],
@@ -182,7 +182,7 @@
     ],
     "meshes" : [
         {
-            "name" : "Cube.042",
+            "name" : "Cube.1413",
             "primitives" : [
                 {
                     "attributes" : {
@@ -194,7 +194,7 @@
             ]
         },
         {
-            "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.008",
+            "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.015",
             "primitives" : [
                 {
                     "attributes" : {
@@ -211,21 +211,16 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Box25_collider",
-            "scale" : [
-                4.435663223266602,
-                0.46671727299690247,
-                0.6131851673126221
-            ],
+            "name" : "Box38_collider",
             "translation" : [
-                5.4345011711120605,
-                0.4707838296890259,
-                -9.111958503723145
+                0.0,
+                0.0,
+                4.76837158203125e-07
             ]
         },
         {
             "mesh" : 1,
-            "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.005",
+            "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.034",
             "rotation" : [
                 0.7071068286895752,
                 0.0,
@@ -242,8 +237,8 @@
         {
             "name" : "Scene",
             "nodes" : [
-                1,
-                0
+                0,
+                1
             ]
         }
     ],

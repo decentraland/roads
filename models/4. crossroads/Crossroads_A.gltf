@@ -2,50 +2,6 @@
     "accessors" : [
         {
             "bufferView" : 0,
-            "componentType" : 5121,
-            "count" : 30,
-            "max" : [
-                19
-            ],
-            "min" : [
-                0
-            ],
-            "type" : "SCALAR"
-        },
-        {
-            "bufferView" : 1,
-            "componentType" : 5126,
-            "count" : 20,
-            "max" : [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "min" : [
-                -1.0,
-                -1.0,
-                -1.0
-            ],
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 2,
-            "componentType" : 5126,
-            "count" : 20,
-            "max" : [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "min" : [
-                -1.0,
-                0.0,
-                -1.0
-            ],
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 3,
             "componentType" : 5123,
             "count" : 3150,
             "max" : [
@@ -57,23 +13,23 @@
             "type" : "SCALAR"
         },
         {
-            "bufferView" : 4,
+            "bufferView" : 1,
             "componentType" : 5126,
             "count" : 2033,
             "max" : [
-                9.999998092651367,
-                -6.61541548652167e-07,
-                0.01602017879486084
+                4.999998092651367,
+                4.999999523162842,
+                0.016019364818930626
             ],
             "min" : [
-                -5.091280854685465e-07,
-                -9.999998092651367,
-                -11.724087715148926
+                -5.000000476837158,
+                -4.999998092651367,
+                -11.724088668823242
             ],
             "type" : "VEC3"
         },
         {
-            "bufferView" : 5,
+            "bufferView" : 2,
             "componentType" : 5126,
             "count" : 2033,
             "max" : [
@@ -89,7 +45,7 @@
             "type" : "VEC3"
         },
         {
-            "bufferView" : 6,
+            "bufferView" : 3,
             "componentType" : 5126,
             "count" : 2033,
             "max" : [
@@ -101,6 +57,50 @@
                 0.008586406707763672
             ],
             "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5121,
+            "count" : 66,
+            "max" : [
+                39
+            ],
+            "min" : [
+                0
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 40,
+            "max" : [
+                1.0623470544815063,
+                1.9859650135040283,
+                1.040594220161438
+            ],
+            "min" : [
+                -1.0462936162948608,
+                -0.014035224914550781,
+                -1.0680464506149292
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 40,
+            "max" : [
+                0.9328531622886658,
+                1.0,
+                0.9328531622886658
+            ],
+            "min" : [
+                -0.9328531622886658,
+                0.0,
+                -0.9328531622886658
+            ],
+            "type" : "VEC3"
         }
     ],
     "asset" : {
@@ -110,50 +110,50 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 30,
+            "byteLength" : 6300,
             "byteOffset" : 0,
             "target" : 34963
         },
         {
             "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 32,
-            "target" : 34962
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 272,
-            "target" : 34962
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 6300,
-            "byteOffset" : 512,
-            "target" : 34963
-        },
-        {
-            "buffer" : 0,
             "byteLength" : 24396,
-            "byteOffset" : 6812,
+            "byteOffset" : 6300,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 24396,
-            "byteOffset" : 31208,
+            "byteOffset" : 30696,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 16264,
-            "byteOffset" : 55604,
+            "byteOffset" : 55092,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 66,
+            "byteOffset" : 71356,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 480,
+            "byteOffset" : 71424,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 480,
+            "byteOffset" : 71904,
             "target" : 34962
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 71868,
+            "byteLength" : 72384,
             "uri" : "Crossroads_A.bin"
         }
     ],
@@ -182,49 +182,55 @@
     ],
     "meshes" : [
         {
-            "name" : "Cube.031",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "NORMAL" : 2,
-                        "POSITION" : 1
-                    },
-                    "indices" : 0
-                }
-            ]
-        },
-        {
             "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.006",
             "primitives" : [
                 {
                     "attributes" : {
-                        "NORMAL" : 5,
-                        "POSITION" : 4,
-                        "TEXCOORD_0" : 6
+                        "NORMAL" : 2,
+                        "POSITION" : 1,
+                        "TEXCOORD_0" : 3
                     },
-                    "indices" : 3,
+                    "indices" : 0,
                     "material" : 0
+                }
+            ]
+        },
+        {
+            "name" : "Cube.031",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "NORMAL" : 6,
+                        "POSITION" : 5
+                    },
+                    "indices" : 4
                 }
             ]
         }
     ],
     "nodes" : [
         {
-            "mesh" : 0,
+            "mesh" : 1,
             "name" : "Box14_collider",
+            "rotation" : [
+                0.0,
+                -0.296638548374176,
+                -0.0,
+                0.9549898505210876
+            ],
             "scale" : [
-                1.3515290021896362,
+                1.3515291213989258,
                 0.9278152585029602,
-                1.3515290021896362
+                1.3515291213989258
             ],
             "translation" : [
-                4.930023670196533,
-                0.9147933125495911,
-                -5.081309795379639
+                0.0,
+                5.960464477539063e-08,
+                1.862645149230957e-09
             ]
         },
         {
-            "mesh" : 1,
+            "mesh" : 0,
             "name" : "Scifi_Panel_04_Plaza014_group4.011_Scifi_Panel_04_Plaza014_.007",
             "rotation" : [
                 0.7071068286895752,

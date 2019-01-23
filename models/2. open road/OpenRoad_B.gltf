@@ -3,9 +3,9 @@
         {
             "bufferView" : 0,
             "componentType" : 5121,
-            "count" : 30,
+            "count" : 60,
             "max" : [
-                19
+                39
             ],
             "min" : [
                 0
@@ -15,23 +15,23 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 20,
+            "count" : 40,
             "max" : [
-                1.0,
-                1.0,
-                1.0
+                2.2971181869506836,
+                2.051983594894409,
+                -7.755105018615723
             ],
             "min" : [
-                -1.0,
-                -1.0,
-                -1.0
+                -2.4202990531921387,
+                0.05198335647583008,
+                -9.755105018615723
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 20,
+            "count" : 40,
             "max" : [
                 1.0,
                 1.0,
@@ -116,53 +116,9 @@
             ],
             "min" : [
                 0.03723682463169098,
-                0.013885259628295898
+                0.014743030071258545
             ],
             "type" : "VEC2"
-        },
-        {
-            "bufferView" : 8,
-            "componentType" : 5121,
-            "count" : 30,
-            "max" : [
-                19
-            ],
-            "min" : [
-                0
-            ],
-            "type" : "SCALAR"
-        },
-        {
-            "bufferView" : 9,
-            "componentType" : 5126,
-            "count" : 20,
-            "max" : [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "min" : [
-                -1.0,
-                -1.0,
-                -1.0
-            ],
-            "type" : "VEC3"
-        },
-        {
-            "bufferView" : 10,
-            "componentType" : 5126,
-            "count" : 20,
-            "max" : [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "min" : [
-                -1.0,
-                0.0,
-                -1.0
-            ],
-            "type" : "VEC3"
         }
     ],
     "asset" : {
@@ -172,74 +128,56 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 30,
+            "byteLength" : 60,
             "byteOffset" : 0,
             "target" : 34963
         },
         {
             "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 32,
+            "byteLength" : 480,
+            "byteOffset" : 60,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 272,
+            "byteLength" : 480,
+            "byteOffset" : 540,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 3588,
-            "byteOffset" : 512,
+            "byteOffset" : 1020,
             "target" : 34963
         },
         {
             "buffer" : 0,
             "byteLength" : 13824,
-            "byteOffset" : 4100,
+            "byteOffset" : 4608,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 13824,
-            "byteOffset" : 17924,
+            "byteOffset" : 18432,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 18432,
-            "byteOffset" : 31748,
+            "byteOffset" : 32256,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 9216,
-            "byteOffset" : 50180,
-            "target" : 34962
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 30,
-            "byteOffset" : 59396,
-            "target" : 34963
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 59428,
-            "target" : 34962
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 240,
-            "byteOffset" : 59668,
+            "byteOffset" : 50688,
             "target" : 34962
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 59908,
+            "byteLength" : 59904,
             "uri" : "OpenRoad_B.bin"
         }
     ],
@@ -293,35 +231,9 @@
                     "material" : 0
                 }
             ]
-        },
-        {
-            "name" : "Cube.037",
-            "primitives" : [
-                {
-                    "attributes" : {
-                        "NORMAL" : 10,
-                        "POSITION" : 9
-                    },
-                    "indices" : 8
-                }
-            ]
         }
     ],
     "nodes" : [
-        {
-            "mesh" : 2,
-            "name" : "Box19_collider",
-            "scale" : [
-                1.5420939922332764,
-                0.8122724294662476,
-                0.48215413093566895
-            ],
-            "translation" : [
-                6.973222732543945,
-                0.8544971942901611,
-                -9.284393310546875
-            ]
-        },
         {
             "mesh" : 0,
             "name" : "Box20_collider",
@@ -331,9 +243,9 @@
                 0.48215413093566895
             ],
             "translation" : [
-                2.782710075378418,
-                0.8544971942901611,
-                -9.284393310546875
+                0.0,
+                1.1920928955078125e-07,
+                -0.0
             ]
         },
         {
@@ -344,11 +256,6 @@
                 0.0,
                 -0.0,
                 0.7071067094802856
-            ],
-            "translation" : [
-                5.0,
-                0.0,
-                -5.0
             ]
         }
     ],
@@ -360,9 +267,8 @@
         {
             "name" : "Scene",
             "nodes" : [
-                2,
-                0,
-                1
+                1,
+                0
             ]
         }
     ],
