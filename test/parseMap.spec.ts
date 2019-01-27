@@ -1,4 +1,4 @@
-import { Map } from '../src/types'
+import { DclMap } from '../src/types'
 import {
     CORNER, ROAD, OPEN_ROAD, CROSS_ROADS, OPEN_CORNER, OPEN_FORK, FORK, DEAD_END,
     EMPTY_FORK,
@@ -10,7 +10,7 @@ import { processMap } from '../src/parseMap'
 
 try {
 
-const testCase: Map = {
+const testCase: DclMap = {
     parcels: [
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 1, y: 2, id: 'a', district_id: DISTRICT_ID },
@@ -26,7 +26,7 @@ if (result1[1][0].orientation !== SOUTH) console.log('Missed dead end, south')
 if (result1[1][1].roadType !== ROAD) console.log('Missed north-south')
 if (result1[1][1].orientation !== NORTH) console.log('Missed north-south orientation')
 
-const case2: Map = {
+const case2: DclMap = {
     parcels: [
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 1, y: 2, id: 'a', district_id: DISTRICT_ID },
@@ -46,7 +46,7 @@ if (result2[1][1].roadType !== OPEN_ROAD) console.log('Missed north-south double
 if (result2[2][1].roadType !== OPEN_ROAD) console.log('Missed north-south double')
 
 
-const case3: Map = {
+const case3: DclMap = {
     parcels: [
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },
@@ -63,7 +63,7 @@ if (result3[2][1].orientation !== EAST) console.log('Missed middle end orientati
 if (result3[2][2].roadType !== DEAD_END) console.log('Missed middle dead end')
 if (result3[2][2].orientation !== NORTH) console.log('Missed middle dead end orientation')
 
-const case4: Map = {
+const case4: DclMap = {
     parcels: [
         { x: 0, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
@@ -87,7 +87,7 @@ if (result4[2][2].orientation !== SOUTH) console.log('Missed empty fork orientat
 if (result4[2][1].roadType !== OPEN_FORK) console.log('Missed open fork')
 if (result4[2][1].orientation !== NORTH) console.log('Missed open fork orientation')
 
-const case5: Map = {
+const case5: DclMap = {
     parcels: [
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },
@@ -100,7 +100,7 @@ const case5: Map = {
 const result5 = processMap(case5)
 if (result5[3][1].roadType !== CORNER) console.log('Missed closed corner')
 
-const case6: Map = {
+const case6: DclMap = {
     parcels: [
         { x: 1, y: 1, id: 'a', district_id: DISTRICT_ID },
         { x: 2, y: 1, id: 'a', district_id: DISTRICT_ID },

@@ -22,7 +22,7 @@ const allParcels = genesis['data']['assets']['parcels'].map(x => ({
 }))
 
 // const minX = -150, maxX = 150, minY = -150, maxY = 150
-const minX = -49, maxX = -40, minY = 45, maxY = 50
+const minX = -50, maxX = 0, minY = 0, maxY = 50
 
 const topBottom = allParcels.filter(x => (x.x >= minX) && (x.x <= maxX) && (x.y >= minY) && (x.y <= maxY))
 

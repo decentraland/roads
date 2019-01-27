@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx ts-node test/parseMap.spec.ts",
     "build": "npx ts-node src/bin/generateFolders.ts",
+    "deploy": "npx ts-node src/bin/deployOutput.ts",
     "run": "npx ts-node src/bin/testPage.ts"
   },
   "author": "",

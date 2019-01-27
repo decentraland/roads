@@ -1,8 +1,8 @@
 import fs = require('fs')
 
-import { genesis } from './genesis'
-import { processMap } from './parseMap'
-import { DISTRICT_ID, ROAD, OPEN_FORK, OPEN_ROAD, OPEN_CORNER, CROSS_ROADS, EMPTY_FORK, CORNER, DEAD_END, FORK  } from './const'
+import { genesis } from '../genesis'
+import { processMap } from '../parseMap'
+import { DISTRICT_ID, ROAD, OPEN_FORK, OPEN_ROAD, OPEN_CORNER, CROSS_ROADS, EMPTY_FORK, CORNER, DEAD_END, FORK  } from '../const'
 
 const allParcels = genesis['data']['assets']['parcels'].map(x => ({
     x: x.x,
@@ -10,9 +10,10 @@ const allParcels = genesis['data']['assets']['parcels'].map(x => ({
     district_id: x.district_id
 }))
 
-const minX = -49, maxX = -1, minY = 1, maxY = 49
+//const minX = -150, maxX = 150, minY = -150, maxY = 150
+const minX = -50, maxX = 0, minY = 0, maxY = 50
 
-const topBottom = allParcels.filter(x => (x.x >= -49) && (x.x < 1) && (x.y >= 1) && (x.y <= 49))
+const topBottom = allParcels.filter(x => (x.x >= minX) && (x.x < maxX) && (x.y >= minY) && (x.y <= maxY))
 
 const result = processMap({ parcels: topBottom }) 
 
@@ -35,9 +36,10 @@ const colorRoad = {
 let appendText = ''
 for (let i = minX; i <= maxX; i++) {
     for (let j = minY; j <= maxY; j++) {
+        if (!result[i]) continue;
         if (!result[i][j]) continue;
-        const posX = i * width + 50*width
-        const posY = -j * width + 50*width
+        const posX = i * width + (Math.abs(minX-maxX+1))*width
+        const posY = -j * width + (Math.abs(minX-maxX+1))*width
         const parcel = result[i][j]
         const color = colorRoad[parcel.roadType]
         appendText += (
@@ -47,7 +49,9 @@ for (let i = minX; i <= maxX; i++) {
                 posX
             }px; background-color: ${
                 color
-            }">${parcel.orientation}</div>`
+            }">${
+                parcel.roadType
+            }</div>`
         )
     }
 }
