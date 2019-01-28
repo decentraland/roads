@@ -1,7 +1,5 @@
-import { mainnet } from './map'
 import { DISTRICT_ID,
     NORTH, SOUTH, EAST, WEST,
-    NS, EW, NE, SW, SE,
     ROAD, OPEN_ROAD, OPEN_CORNER, CROSS_ROADS, 
     EMPTY_FORK, CORNER, DEAD_END, FORK, OPEN_FORK
 } from './const'

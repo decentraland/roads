@@ -2,16 +2,7 @@ import fs = require('fs')
 
 import { genesis } from '../genesis'
 import { processMap } from '../parseMap'
-import { DISTRICT_ID,
-    ROAD,
-    OPEN_FORK,
-    OPEN_ROAD,
-    OPEN_CORNER,
-    CROSS_ROADS,
-    EMPTY_FORK,
-    CORNER,
-    DEAD_END,
-    FORK,
+import {
     NORTH, EAST, SOUTH, WEST, TYPE_MAP, MODEL_FILENAME
 } from '../const'
 
@@ -21,8 +12,8 @@ const allParcels = genesis['data']['assets']['parcels'].map(x => ({
     district_id: x.district_id
 }))
 
-// const minX = -150, maxX = 150, minY = -150, maxY = 150
-const minX = -50, maxX = 0, minY = 0, maxY = 50
+const minX = -150, maxX = 150, minY = -150, maxY = 150
+// const minX = -30, maxX = -20, minY = 10, maxY = 40
 
 const topBottom = allParcels.filter(x => (x.x >= minX) && (x.x <= maxX) && (x.y >= minY) && (x.y <= maxY))
 
@@ -34,10 +25,10 @@ let sceneTemplate = fs.readFileSync('./data/scene_template.json').toString()
 
 const variations = ['A', 'B', 'C', 'D']
 const ORIENTATION = {
-    [NORTH]: 0,
-    [EAST]: 90,
-    [SOUTH]: 180,
-    [WEST]: 270
+    [NORTH]: 90,
+    [EAST]: 180,
+    [SOUTH]: 270,
+    [WEST]: 0
 }
 const OUTPUT = 'output'
 

@@ -6,7 +6,7 @@ import { keys } from '../keys'
 
 const spawn = child.spawn
 
-const concurrency = 10
+const concurrency = 20
 let concurrents = 0
 const waitTime = 300
 
