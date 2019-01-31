@@ -6,7 +6,7 @@ import { keys } from '../keys'
 
 const spawn = child.spawn
 
-const concurrency = 20
+const concurrency = 50
 let concurrents = 0
 const waitTime = 300
 
@@ -23,15 +23,15 @@ async function execute(x, y, key) {
             shell: true,
             env: {
                 'DCL_PRIVATE_KEY': key,
-                'PATH': process.env.PATH,
-                'HOME': '/root'
+		'PATH': process.env.PATH,
+		'HOME': '/home/eordano'
             }
         })
         subprocess.stdout.on('data', (data) => {
-              console.log(`stdout: ${data}`)
+	// console.log(`stdout: ${data}`)
         })
         subprocess.stderr.on('data', (data) => {
-              console.log(`stderr: ${data}`)
+	// console.log(`stderr: ${data}`)
         })
         subprocess.on('close', resolve)
     })
@@ -58,6 +58,7 @@ for (let deployer of keys) {
 
 async function runDirs() {
     const dirs = fs.readdirSync(path.join(process.cwd(), 'output'))
+    let i = 0
     for (let dir of dirs) {
         if (!dir) continue
         const [x, y] = dir.split('.')
@@ -75,6 +76,8 @@ async function runDirs() {
             continue;
         }
         await executeDeploy(x, y, key)
+	i++;
+	console.log(`Progress: Deployed ${x}, ${y}, ${i} from ${dirs.length} done`)
     }
 }
 
