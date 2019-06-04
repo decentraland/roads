@@ -3,7 +3,7 @@ import fs = require('fs')
 import { genesis } from '../genesis'
 import { processMap } from '../parseMap'
 import {
-    NORTH, EAST, SOUTH, WEST, TYPE_MAP, MODEL_FILENAME
+    NORTH, EAST, SOUTH, WEST, TYPE_MAP
 } from '../const'
 
 const allParcels = genesis['data']['assets']['parcels'].map(x => ({
@@ -13,17 +13,25 @@ const allParcels = genesis['data']['assets']['parcels'].map(x => ({
 }))
 
 const minX = -150, maxX = 150, minY = -150, maxY = 150
-// const minX = -30, maxX = -20, minY = 10, maxY = 40
+// const minX = -3, maxX = -2, minY = 10, maxY = 14
 
 const topBottom = allParcels.filter(x => (x.x >= minX) && (x.x <= maxX) && (x.y >= minY) && (x.y <= maxY))
 
 const result = processMap({ parcels: topBottom }) 
-console.log(result)
 
 let gameTemplate = fs.readFileSync('./data/game_template.js').toString()
 let sceneTemplate = fs.readFileSync('./data/scene_template.json').toString()
 
-const variations = ['A', 'B', 'C', 'D']
+const endsWithGlb = x => x.endsWith('.glb')
+const fileBasename = x => x.slice(0, x.lastIndexOf('.'))
+const cachedVariations: Record<string, string[]> = {}
+function getModelVariations(modelFolder: string): string[] {
+    if (!cachedVariations[modelFolder]) {
+        cachedVariations[modelFolder] = fs.readdirSync(modelFolder).filter(endsWithGlb).map(fileBasename)
+    }
+    return cachedVariations[modelFolder]
+}
+
 const ORIENTATION = {
     [NORTH]: 90,
     [EAST]: 180,
@@ -37,37 +45,35 @@ for (let i = minX; i <= maxX; i++) {
         try {
         const parcel = result[i][j]
         if (!parcel) {
-            console.log('not found', i, j, result[i])
+	// console.log('not found', i, j, result[i])
             continue
         } else {
-            console.log('found', i, j, result[i][j])
+	// console.log('found', i, j, result[i][j])
         }
         // mkdir
         const targetFolder = `${OUTPUT}/${i}.${j}`
         fs.mkdirSync(targetFolder)
-        console.log('Built folder', targetFolder)
+	// console.log('Built folder', targetFolder)
         // Copy model
         const { roadType, orientation } = parcel
 
         const modelName = roadType
         const index = TYPE_MAP[modelName]
-        const modelFilename = MODEL_FILENAME[modelName]
-        const variation = variations[Math.abs((i + j) % 4)]
 
         const folderName =`models/${index}. ${modelName}`
-        const gltfName = `${folderName}/${modelFilename}_${variation}.gltf`
-        const binName = `${folderName}/${modelFilename}_${variation}.bin`
-        const texture = `${folderName}/Texture_Roads.png`
-        console.log('Copying files...', gltfName, binName, texture)
-        fs.copyFileSync(gltfName, `${targetFolder}/${modelFilename}_${variation}.gltf`)
-        fs.copyFileSync(binName, `${targetFolder}/${modelFilename}_${variation}.bin`)
-        fs.copyFileSync(texture, `${targetFolder}/Texture_Roads.png`)
+	// console.log(getModelVariations(folderName))
+	const variations = getModelVariations(folderName)
+	const variation = variations[Math.abs(i + j) % (variations.length)]
+
+        const gltfName = `${folderName}/${variation}.glb`
+	// console.log('Copying files...', gltfName)
+        fs.copyFileSync(gltfName, `${targetFolder}/${variation}.glb`)
 
         // Make game.js
         fs.writeFileSync(
             `${targetFolder}/game.js`,
             gameTemplate
-                .replace('__MODEL__', `${modelFilename}_${variation}`)
+                .replace('__MODEL__', variation)
                 .replace('__ROTATION__', '' + ORIENTATION[orientation])
         )
         // Make scene.json
@@ -76,7 +82,7 @@ for (let i = minX; i <= maxX; i++) {
             sceneTemplate
                 .replace('__COORDINATES__', `${i},${j}`)
                 .replace('__COORDINATES__', `${i},${j}`)
-                .replace('__TITLE__', `Road at ${i},${j} (${modelFilename} ${variation})`)
+                .replace('__TITLE__', `Road at ${i},${j} (${modelName} ${variation})`)
         )
         } catch (e) {
             console.log(e.stack)

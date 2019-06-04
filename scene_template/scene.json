@@ -1,18 +1,18 @@
 {
   "display": {
-    "title": "__TITLE__",
+    "title": "interactive-text",
     "favicon": "favicon_asset"
   },
   "contact": {
-    "name": "",
+    "name": "author-name",
     "email": ""
   },
   "owner": "",
   "scene": {
     "parcels": [
-        "__COORDINATES__"
+      "0,0"
     ],
-    "base": "__COORDINATES__"
+    "base": "0,0"
   },
   "communications": {
     "type": "webrtc",

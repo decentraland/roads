@@ -18,20 +18,20 @@ async function delay(time) {
 
 async function execute(x, y, key) {
     return new Promise((resolve, reject) => {
-        const subprocess = spawn('dcl', ['deploy', '-y', '.'], {
-            cwd: path.join(process.cwd(), 'output', `${x}.${y}`),
+        const subprocess = spawn('dcl', ['deploy', '-y', path.join('output', `${x}.${y}`)], {
+            cwd: process.cwd(),
             shell: true,
             env: {
                 'DCL_PRIVATE_KEY': key,
 		'PATH': process.env.PATH,
-		'HOME': '/home/eordano'
+		'HOME': '/Users/usr'
             }
         })
         subprocess.stdout.on('data', (data) => {
-	// console.log(`stdout: ${data}`)
+	 console.log(`stdout: ${data}`)
         })
         subprocess.stderr.on('data', (data) => {
-	// console.log(`stderr: ${data}`)
+	 console.log(`stderr: ${data}`)
         })
         subprocess.on('close', resolve)
     })
