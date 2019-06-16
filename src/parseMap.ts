@@ -1,6 +1,6 @@
 import { DISTRICT_ID,
     NORTH, SOUTH, EAST, WEST,
-    ROAD, OPEN_ROAD, OPEN_CORNER, CROSS_ROADS, 
+    ROAD, OPEN_ROAD, OPEN_CORNER, CROSS_ROADS, HALF_FORK_LEFT, HALF_FORK_RIGHT,
     EMPTY_FORK, CORNER, DEAD_END, FORK, OPEN_FORK
 } from './const'
 import { DclMap, Parcel, Road, Roadmap, CoordinateMap } from './types'
@@ -14,46 +14,67 @@ export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
     }
 
     const { x, y } = parcel
-    const emptyVertical = !get(x,y+1) && !get(x,y-1)
-    const emptyOneVertical = (!get(x,y+1) || !get(x,y-1)) && !emptyVertical
-    const fullVertical = !!get(x,y+1) && !!get(x,y-1)
 
-    const emptySides = !get(x+1,y) && !get(x-1,y)
-    const emptyOneSide = (!get(x+1,y) || !get(x-1,y)) && !emptySides
-    const fullSides = !!get(x+1,y) && !!get(x-1,y)
+    const n = !!get(x,y+1)
+    const s = !!get(x,y-1)
+    const e = !!get(x+1,y)
+    const w = !!get(x-1,y)
+    const ne = !!get(x+1,y+1)
+    const se = !!get(x+1,y-1)
+    const nw = !!get(x-1,y+1)
+    const sw = !!get(x-1,y-1)
+    const countEdges = (+ne) + (+se) + (+nw) + (+sw)
 
-    const ne = get(x+1,y+1)
-    const se = get(x+1,y-1)
-    const nw = get(x-1,y+1)
-    const sw = get(x-1,y-1)
+    const emptyVertical = !n && !s
+    const emptyOneVertical = !n || !s && (n || s)
+    const fullVertical = n && s
+
+    const emptySides = !e && !w
+    const emptyOneSide = !w || !e && (e || w)
+    const fullSides = e && w
+
+    console.log(JSON.stringify({ x, y, n, s, e, w, countEdges, emptyVertical, emptySides, emptyOneSide, emptyOneVertical}))
 
     // Simpler Cases for ROADs
     if (fullSides && fullVertical) {
-        const count = (+!!ne) + (+!!se) + (+!!nw) + (+!!sw)
-        if (count === 4) {
+        if (countEdges === 0) {
             return {
                 roadType: CROSS_ROADS,
                 orientation: NORTH
             }
-        } else if (count === 3) {
+        } else if (countEdges === 1) {
             return {
                 roadType: OPEN_FORK,
-                orientation: !sw ? NORTH
-                    : !nw ? EAST
-                    : !ne ? SOUTH
+                orientation: (!sw && !se) ? NORTH
+                    : (!nw && !sw) ? EAST
+                    : (!ne && !nw) ? SOUTH
                     : WEST
             }
-        } else if (count === 2) {
+        } else if (countEdges === 2) {
             const orientation =
-                !nw ? ( !ne ? NORTH : /* !sw */ WEST )
-              : !se ? ( !ne ? EAST  : /* !sw */ SOUTH )
+                !nw ? ( !ne ? EAST : /* !sw */ SOUTH )
+              : !se ? ( !ne ? WEST  : /* !sw */ NORTH )
             : /* fallback */ NORTH
             return {
                 roadType: EMPTY_FORK,
                 orientation
             }
+        } else if (countEdges === 3) {
+            const roadType = OPEN_FORK
+            const orientation = !ne ? SOUTH
+                : !nw ? EAST
+                : !se ? WEST
+                : !sw ? NORTH
+                : null
+            if (orientation === null) {
+                throw new Error(`Imposible to determine orientation of ${x}, ${y}`)
+            }
+            return {
+              roadType,
+              orientation
+            }
         }
-        // 1, 0 currently don't have a model. Fall back to CROSS_ROADS
+        // 4 is not really a thing in the map. Fall back to CROSS_ROADS
         return {
             roadType: CROSS_ROADS,
             orientation: NORTH
@@ -61,47 +82,59 @@ export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
     }
     // Case for Roads or Dead End
     if (emptySides || emptyVertical) {
-        if (emptyOneVertical || emptyOneSide) {
+        if (fullSides || fullVertical) {
+            return {
+                roadType: ROAD,
+                orientation: emptySides ? EAST : NORTH
+            }
+        } else {
             return {
                 roadType: DEAD_END,
-                orientation: get(x,y-1) ? NORTH
-                    : get(x,y+1) ? SOUTH
-                    : get(x-1,y) ? EAST
-                    : get(x+1,y) ? WEST
+                orientation: w ? SOUTH
+                    : n ? WEST
+                    : e ? NORTH
+                    : s ? EAST
                     : null
             }
-        }
-        return {
-            roadType: ROAD,
-            orientation: emptySides ? NORTH : EAST
         }
     }
     // Case for Forks and Open Roads
     if ((fullVertical && emptyOneSide) || (fullSides && emptyOneVertical)) {
         const orientation =
-                !get(x+1,y) ? NORTH
-              : !get(x-1,y) ? SOUTH
-              : !get(x,y-1) ? EAST
-              : !get(x,y+1) ? WEST
+                !n ? NORTH
+              : !s ? SOUTH
+              : !e ? EAST
+              : !w ? WEST
               : null
         const roadType =
-          (orientation == NORTH || orientation == EAST && get(x-1,y+1)) ? OPEN_ROAD 
-        : (orientation == SOUTH || orientation == WEST && get(x+1,y-1)) ? OPEN_ROAD : FORK
+          (orientation == NORTH && se && sw) ? OPEN_ROAD
+        : (orientation == SOUTH && ne && nw) ? OPEN_ROAD
+        : (orientation == EAST && sw && nw) ? OPEN_ROAD
+        : (orientation == WEST && se && ne) ? OPEN_ROAD
+        : (orientation == NORTH && !se && sw) ? HALF_FORK_LEFT
+        : (orientation == NORTH && se && !sw) ? HALF_FORK_RIGHT
+        : (orientation == SOUTH && !ne && nw) ? HALF_FORK_RIGHT
+        : (orientation == SOUTH && ne && !nw) ? HALF_FORK_LEFT
+        : (orientation == EAST && !nw && sw) ? HALF_FORK_LEFT
+        : (orientation == EAST && nw && !sw) ? HALF_FORK_RIGHT
+        : (orientation == WEST && !ne && se) ? HALF_FORK_RIGHT
+        : (orientation == WEST && ne && !se) ? HALF_FORK_LEFT
+        : FORK
         return { orientation, roadType }
     }
     // Corner and open Corners
     if (emptyOneSide && emptyOneVertical) {
         const orientation =
-                (get(x-1,y) && get(x,y-1)) ? NORTH
-              : (get(x+1,y) && get(x,y+1)) ? SOUTH
-              : (get(x-1,y) && get(x,y+1)) ? EAST
-              : (get(x+1,y) && get(x,y-1)) ? WEST
+                (s && e) ? NORTH
+              : (n && w) ? SOUTH
+              : (s && w) ? EAST
+              : (n && e) ? WEST
               : null
         const roadType =
-            (orientation == NORTH && !get(x-1,y-1)) ? CORNER
-          : (orientation == SOUTH && !get(x+1,y+1)) ? CORNER
-          : (orientation == EAST && !get(x-1,y+1)) ? CORNER
-          : (orientation == WEST && !get(x+1,y-1)) ? CORNER
+            (orientation == NORTH && !se) ? CORNER
+          : (orientation == SOUTH && !nw) ? CORNER
+          : (orientation == EAST && !sw) ? CORNER
+          : (orientation == WEST && !ne) ? CORNER
           : OPEN_CORNER
         return {
             roadType, orientation

@@ -2,6 +2,8 @@ export const DISTRICT_ID = 'f77140f9-c7b4-4787-89c9-9fa0e219b079'
 
 export const EMPTY = 'empty'
 
+export const HALF_FORK_LEFT = 'half fork left'
+export const HALF_FORK_RIGHT = 'half fork right'
 export const ROAD = 'road'
 export const OPEN_ROAD = 'open road'
 export const OPEN_CORNER = 'open corner'
@@ -23,7 +25,9 @@ export const TYPE_INDEX = [
     CORNER,  // DONE
     DEAD_END, // DONE
     FORK, // DONE
-    OPEN_FORK // DONE
+    OPEN_FORK, // DONE
+    HALF_FORK_LEFT, // DONE
+    HALF_FORK_RIGHT // DONE
 ]
 export const TYPE_MAP = {}
 TYPE_INDEX.forEach(
@@ -39,6 +43,8 @@ export const MODEL_FILENAME = {
     [DEAD_END]: 'DeadEnd',
     [FORK]: 'Fork',
     [OPEN_FORK]: 'OpenFork',
+    [HALF_FORK_LEFT]: 'HalfForkLeft',
+    [HALF_FORK_RIGHT]: 'HalfForkRight',
 }
 
 export const NORTH = 'north'

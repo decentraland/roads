@@ -1,4 +1,4 @@
-import fs = require('fs')
+import fs = require('fs-extra')
 
 import { genesis } from '../genesis'
 import { processMap } from '../parseMap'
@@ -33,10 +33,10 @@ function getModelVariations(modelFolder: string): string[] {
 }
 
 const ORIENTATION = {
-    [NORTH]: 90,
-    [EAST]: 180,
-    [SOUTH]: 270,
-    [WEST]: 0
+    [NORTH]: 180,
+    [EAST]: 270,
+    [SOUTH]: 0,
+    [WEST]: 90
 }
 const OUTPUT = 'output'
 
@@ -52,7 +52,7 @@ for (let i = minX; i <= maxX; i++) {
         }
         // mkdir
         const targetFolder = `${OUTPUT}/${i}.${j}`
-        fs.mkdirSync(targetFolder)
+        fs.ensureDirSync(targetFolder)
 	// console.log('Built folder', targetFolder)
         // Copy model
         const { roadType, orientation } = parcel
