@@ -7,6 +7,16 @@ import { DclMap, Parcel, Road, Roadmap, CoordinateMap } from './types'
 
 const filterRoads = (x: Parcel[]) => x.filter(x => x.district_id == DISTRICT_ID)
 
+export function turnOrientation(orientation: string) {
+  switch (orientation) {
+    case NORTH: return EAST
+    case EAST: return SOUTH
+    case SOUTH: return WEST
+    case WEST: return NORTH
+    default: return null
+  }
+}
+
 export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
 
     function get(x, y) {
