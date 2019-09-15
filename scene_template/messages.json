@@ -1,0 +1,18 @@
+[
+    {"type":"ComponentCreated","tag":"Cc","payload":"{\"id\":\"Cc\",\"classId\":54,\"name\":\"shape\"}"},
+    {"type":"ComponentUpdated","tag":"Cc","payload":"{\"id\":\"Cc\",\"json\":\"{\\\"withCollisions\\\":true,\\\"visible\\\":true,\\\"src\\\":\\\"Road_0.glb\\\"}\"}"},
+    {"type":"CreateEntity","tag":"Eb","payload":"{\"id\":\"Eb\"}"},
+    {"type":"AttachEntityComponent","tag":"Eb","payload":"{\"entityId\":\"Eb\",\"name\":\"shape\",\"id\":\"Cc\"}"},
+    {"type":"UpdateEntityComponent","tag":"Eb_1","payload":"{\"entityId\":\"Eb\",\"classId\":1,\"name\":\"transform\",\"json\":\"{\\\"position\\\":{\\\"x\\\":8,\\\"y\\\":0,\\\"z\\\":8},\\\"rotation\\\":{\\\"x\\\":0,\\\"y\\\":0.7071067811865475,\\\"z\\\":0,\\\"w\\\":0.7071067811865476},\\\"scale\\\":{\\\"x\\\":1,\\\"y\\\":1,\\\"z\\\":1}}\"}"},
+    {"type":"SetEntityParent","tag":"Eb","payload":"{\"entityId\":\"Eb\",\"parentId\":\"0\"}"},
+    {"type":"InitMessagesFinished","tag":"scene","payload":"{}"}
+]
+[
+    {"type":"ComponentCreated","tag":"Cb","payload":"{\"id\":\"Cb\",\"classId\":54,\"name\":\"shape\"}"},
+    {"type":"ComponentUpdated","tag":"Cb","payload":"{\"id\":\"Cb\",\"json\":\"{\\\"withCollisions\\\":true,\\\"visible\\\":true,\\\"src\\\":\\\"Road_0.glb\\\"}\"}"},
+    {"type":"CreateEntity","tag":"E9","payload":"{\"id\":\"E9\"}"},
+    {"type":"AttachEntityComponent","tag":"E9","payload":"{\"entityId\":\"E9\",\"name\":\"shape\",\"id\":\"Cb\"}"},
+    {"type":"UpdateEntityComponent","tag":"E9_1","payload":"{\"entityId\":\"E9\",\"classId\":1,\"name\":\"transform\",\"json\":\"{\\\"position\\\":{\\\"x\\\":8,\\\"y\\\":0,\\\"z\\\":8},\\\"rotation\\\":{\\\"y\\\":0.7071067811865475,\\\"x\\\":0,\\\"w\\\":0.7071067811865476,\\\"z\\\":0},\\\"scale\\\":{\\\"x\\\":1,\\\"y\\\":1,\\\"z\\\":1}}\"}"},
+    {"type":"SetEntityParent","tag":"E0","payload":"{\"entityId\":\"E0\",\"parentId\":\"0\"}"},
+    {"type":"InitMessagesFinished","tag":"scene","payload":"{}"}
+]

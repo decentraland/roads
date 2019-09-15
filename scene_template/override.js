@@ -1,10 +1,9 @@
-var model = '__MODEL__' + '.glb'
-var rotation = __ROTATION__
-var angle = rotation === 0 ? 0
-  : rotation === 90 ? Math.PI / 4
-  : rotation === 180 ? Math.PI / 2
-  : rotation === 270 ? Math.PI * 3 / 4
-  : rotation / 180 * Math.PI
+const model = __MODEL__ + '.glb'
+const angle = __ROTATION__ === 0 ? 0
+  : __ROTATION__ === 90 ? Math.PI / 4
+  : __ROTATION__ === 180 ? Math.PI / 2
+  : __ROTATION__ === 270 ? Math.PI * 3 / 4
+  : __ROTATION__ / 180 * Math.PI
 
 dcl.subscribe('sceneStart')
 
