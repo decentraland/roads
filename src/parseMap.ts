@@ -62,7 +62,7 @@ export function getType(parcel: Parcel, roads: CoordinateMap<Parcel>): Road {
             }
         } else if (countEdges === 2) {
             const orientation =
-                !nw ? ( !ne ? EAST : /* !sw */ SOUTH )
+                !nw ? ( !ne ? SOUTH : /* !sw */ EAST )
               : !se ? ( !ne ? WEST  : /* !sw */ NORTH )
             : /* fallback */ NORTH
             return {
